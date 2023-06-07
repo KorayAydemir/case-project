@@ -1,0 +1,65 @@
+name: App CI
+
+on:
+    push:
+        branches:
+            - "master"
+        # Run only if files modified are not docs
+        paths-ignore:
+            - "*.md"
+    pull_request:
+        branches:
+            - "master"
+        # Run only if files modified are not docs
+        paths-ignore:
+            - "*.md"
+
+concurrency:
+    group: "pages"
+    cancel-in-progress: true
+jobs:
+    buildAndTest:
+        name: Build & Test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: 🏗 Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: npm
+
+            - name: 🗂️ Install dependencies
+              run: npm i
+
+            - name: 🔨 Build
+              run: npm run build
+
+            - name: 🧪 Test
+              run: npm run test
+
+            # Upload dist artifacts
+            - uses: actions/upload-artifact@v3
+              with:
+                  name: dist
+                  path: dist/
+
+    deploy:
+        name: Deploy
+        if: github.ref == 'refs/heads/master'
+        needs: buildAndTest
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/download-artifact@v3
+              with:
+                  name: dist
+                  path: dist/
+
+            - name: 🚀 Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist

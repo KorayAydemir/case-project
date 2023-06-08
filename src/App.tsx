@@ -1,8 +1,10 @@
+import { AppleTree } from "./components/AppleTree/AppleTree";
+
 function App() {
     return (
-        <>
-            <span className="text-2xl">Hello</span>
-        </>
+        <div className="max-w-screen-xl mx-auto">
+            <AppleTree />
+        </div>
     );
 }
 

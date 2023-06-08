@@ -93,4 +93,4 @@ const Config: UserConfig = {
     },
 };
 
-module.exports = Config;
+export default Config;

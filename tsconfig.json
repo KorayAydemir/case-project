@@ -23,6 +23,7 @@
         "isolatedModules": true,
         "jsx": "react-jsx",
         "incremental": true,
+        "types": ["vite-plugin-svgr/client", "@types/jest"],
         "paths": {
             "@components/*": ["./src/*"]
         }

@@ -1,12 +1,29 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Apple } from "../Apple/Apple";
 import { Tree } from "../Tree/Tree";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { setShouldShake } from "../../redux/slices/shouldShakeSlice";
 
 export const AppleTree = () => {
     const shouldShake = useSelector(
         (state: { shouldShake: boolean }) => state.shouldShake
     );
+    const dispatch = useDispatch();
+    const [shouldAnimate, setShouldAnimate] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            dispatch(setShouldShake(false));
+        }, 3000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [shouldShake, dispatch]);
+
+    useEffect(() => {
+        setShouldAnimate(false);
+    }, []);
 
     const numApples = 20;
     const treeWidth = 550;
@@ -23,7 +40,9 @@ export const AppleTree = () => {
             return (
                 <Apple
                     key={index}
-                    className="w-[70px] h-[70px] absolute"
+                    className={`w-[70px] h-[70px] absolute ${
+                        shouldAnimate ? "apple-anim" : ""
+                    }`}
                     style={{
                         left: `${treeRadius + left}px`,
                         top: `${treeRadius + top}px`,
@@ -31,7 +50,7 @@ export const AppleTree = () => {
                 />
             );
         });
-    }, [numApples, treeRadius]);
+    }, [numApples, treeRadius, shouldAnimate]);
 
     const treeStyle = {
         width: `${treeWidth}px`,

@@ -10,33 +10,39 @@ svg:hover #g3287 > *:not(:nth-child(36)):not(:nth-child(37)) {
 }*/
 
 .shake-animation {
-    animation: shake 0.5s;
+    animation: shaker 1.8s;
     animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 
 .shake-animation ~ #svg5 {
-    animation: shake 0.5s;
+    animation: shaker 1.8s;
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    animation-delay: 0.1s;
 }
 
-#svg5 {
-    animation: scaleUp 1s forwards;
-    will-change: transform;
-    backface-visibility: hidden;
-}
-
-@keyframes scaleUp {
-    from {
-        transform: scale(0.1);
+@keyframes shaker {
+    0% {
+        transform: translateX(0);
     }
-    to {
-        transform: scale(1);
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-10px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0);
     }
 }
-
-/*#g6179 path {
-    animation: scale 2s;
-}*/
 
 @keyframes shake {
     0% {
@@ -71,5 +77,19 @@ svg:hover #g3287 > *:not(:nth-child(36)):not(:nth-child(37)) {
     }
     100% {
         transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.apple-anim {
+    animation: scaleUp 0.8s forwards;
+    backface-visibility: hidden;
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.1);
+    }
+    to {
+        transform: scale(1);
     }
 }

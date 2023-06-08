@@ -1,7 +1,11 @@
 import { Button } from "../Button/Button";
+import { useDispatch } from "react-redux";
+import { setShouldShake } from "../../redux/slices/shouldShakeSlice";
 export const ShakeTreeButton = () => {
+    const dispatch = useDispatch();
+
     const clickHandler = () => {
-        console.log("shake the tree!");
+        dispatch(setShouldShake(true));
     };
     return (
         <div className="mt-10">

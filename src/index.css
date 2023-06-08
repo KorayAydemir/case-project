@@ -9,31 +9,34 @@ svg:hover #g3287 > *:not(:nth-child(36)):not(:nth-child(37)) {
     animation-iteration-count: infinite;
 }*/
 
-svg:hover {
+.shake-animation {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
 }
 
-svg:hover ~ #svg5 {
+.shake-animation ~ #svg5 {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
+}
+
+#svg5 {
+    animation: scaleUp 1s forwards;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.1);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
 /*#g6179 path {
     animation: scale 2s;
 }*/
-
-@keyframes myAnimation {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(100px, 100px);
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
 
 @keyframes shake {
     0% {

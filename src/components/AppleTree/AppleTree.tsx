@@ -31,7 +31,7 @@ export const AppleTree = () => {
     };
 
     return (
-        <div className="relative">
+        <div className="relative max-w-screen-xl">
             <Tree className="" style={treeStyle} />
             {apples}
         </div>

@@ -5,7 +5,7 @@ export const Apple = ({
     style,
 }: {
     className: string;
-    style: any;
+    style: React.CSSProperties;
 }) => {
     return <AppleSvg className={className} style={style} />;
 };

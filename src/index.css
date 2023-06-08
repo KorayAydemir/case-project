@@ -1,13 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /*
 svg:hover #g3287 > *:not(:nth-child(36)):not(:nth-child(37)) {
     animation: shake 0.5s;
 
     animation-iteration-count: infinite;
 }*/
+
 svg:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+
+svg:hover ~ #svg5 {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
 }

@@ -1,9 +1,11 @@
 import { ReactComponent as AppleSvg } from "../../assets/apple.svg";
 
-export const Apple = ({ className }: { className: string }) => {
-    return (
-        <div>
-            <AppleSvg className={className} />
-        </div>
-    );
+export const Apple = ({
+    className,
+    style,
+}: {
+    className: string;
+    style: any;
+}) => {
+    return <AppleSvg className={className} style={style} />;
 };

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Apple } from "../Apple/Apple";
 import { Tree } from "../Tree/Tree";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { setShouldShake } from "../../redux/slices/shouldShakeSlice";
 
 export const AppleTree = () => {
@@ -9,7 +9,6 @@ export const AppleTree = () => {
         (state: { shouldShake: boolean }) => state.shouldShake
     );
     const dispatch = useDispatch();
-    const [shouldAnimate, setShouldAnimate] = useState(true);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -21,36 +20,37 @@ export const AppleTree = () => {
         };
     }, [shouldShake, dispatch]);
 
-    useEffect(() => {
-        setShouldAnimate(false);
-    }, []);
-
-    const numApples = 20;
     const treeWidth = 550;
     const treeHeight = 900;
-    const treeRadius = treeHeight / 2 / 2;
 
-    const apples = useMemo(() => {
-        return Array.from({ length: numApples }).map((_, index) => {
+    const getAppleCoordinates = useCallback(() => {
+        const numApples = 20;
+        const treeRadius = treeHeight / 2 / 2;
+        return Array.from({ length: numApples }).map(() => {
             const angle = Math.random() * 360 * (Math.PI / 180);
             const radius = Math.sqrt(Math.random()) * treeRadius;
 
             const left = Math.cos(angle) * radius;
             const top = Math.sin(angle) * radius;
+
+            return {
+                left: `${treeRadius + left}px`,
+                top: `${treeRadius + top}px`,
+            };
+        });
+    }, []);
+
+    const apples = useMemo(() => {
+        return getAppleCoordinates().map((coordinates, index) => {
             return (
                 <Apple
                     key={index}
-                    className={`w-[70px] h-[70px] absolute ${
-                        shouldAnimate ? "apple-anim" : ""
-                    }`}
-                    style={{
-                        left: `${treeRadius + left}px`,
-                        top: `${treeRadius + top}px`,
-                    }}
+                    className="w-[70px] h-[70px] absolute apple-anim"
+                    style={coordinates}
                 />
             );
         });
-    }, [numApples, treeRadius, shouldAnimate]);
+    }, [getAppleCoordinates]);
 
     const treeStyle = {
         width: `${treeWidth}px`,

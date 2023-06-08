@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Apple } from "../Apple/Apple";
 import { Tree } from "../Tree/Tree";
 import { useCallback, useEffect, useMemo } from "react";
 import { setShouldShake } from "../../redux/slices/shouldShakeSlice";
+import { Apple } from "../Apple/Apple";
 
 export const AppleTree = () => {
     const shouldShake = useSelector(
@@ -23,6 +23,11 @@ export const AppleTree = () => {
     const treeWidth = 550;
     const treeHeight = 900;
 
+    const treeStyle = {
+        width: `${treeWidth}px`,
+        height: `${treeHeight}px`,
+    };
+
     const getAppleCoordinates = useCallback(() => {
         const numApples = 20;
         const treeRadius = treeHeight / 2 / 2;
@@ -38,32 +43,20 @@ export const AppleTree = () => {
                 top: `${treeRadius + top}px`,
             };
         });
-    }, []);
-
-    const apples = useMemo(() => {
-        return getAppleCoordinates().map((coordinates, index) => {
-            return (
-                <Apple
-                    key={index}
-                    className="w-[70px] h-[70px] absolute apple-anim"
-                    style={coordinates}
-                />
-            );
-        });
+    }, [treeHeight]);
+    const applesCoords = useMemo(() => {
+        return getAppleCoordinates();
     }, [getAppleCoordinates]);
-
-    const treeStyle = {
-        width: `${treeWidth}px`,
-        height: `${treeHeight}px`,
-    };
 
     return (
         <div className="relative max-w-screen-xl">
             <Tree
-                className={`${shouldShake ? "shake-animation" : ""}`}
+                className={`${shouldShake ? "tree-shake-anim" : ""}`}
                 style={treeStyle}
             />
-            {apples}
+            {applesCoords.map((coords) => (
+                <Apple coords={coords} />
+            ))}
         </div>
     );
 };

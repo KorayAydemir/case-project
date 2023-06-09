@@ -11,6 +11,10 @@ export const Apple = ({ coords }: { coords: TCoordinates }) => {
         (state: { shouldShake: boolean }) => state.shouldShake
     );
 
+    const isShakeDone = useSelector(
+        (state: { isShakeDone: boolean }) => state.isShakeDone
+    );
+
     const firstRender = useRef(true);
 
     /** we need to check if it is the first render
@@ -28,10 +32,24 @@ export const Apple = ({ coords }: { coords: TCoordinates }) => {
         return "";
     }, [shouldShake]);
 
+    const fallClassName = useMemo(() => {
+        if (isShakeDone) {
+            const heightFromTop = parseInt(coords.top);
+            const fallHeight = 690 - heightFromTop;
+            return {
+                transform: `translateY(${fallHeight}px)`,
+            };
+        }
+        return "";
+    }, [isShakeDone, coords]);
+
     return (
         <AppleSvg
             className={`w-[70px] h-[70px] absolute ${extraClassName}`}
-            style={coords}
+            style={{
+                ...fallClassName,
+                ...coords,
+            }}
         />
     );
 };

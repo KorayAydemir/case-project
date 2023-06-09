@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 export const shouldShakeSlice = createSlice({
     name: "shouldShake",
     initialState: false,
@@ -25,4 +26,4 @@ export const { setShouldShake } = shouldShakeSlice.actions;
 export const { setIsShakeDone } = isShakeDoneSlice.actions;
 
 export const shouldShakeReducer = shouldShakeSlice.reducer;
-export const isShakeDoneReducer = shouldShakeSlice.reducer;
+export const isShakeDoneReducer = isShakeDoneSlice.reducer;

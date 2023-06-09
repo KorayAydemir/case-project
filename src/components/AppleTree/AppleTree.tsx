@@ -1,18 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Tree } from "../Tree/Tree";
 import { useCallback, useEffect, useMemo } from "react";
-import { setShouldShake } from "../../redux/slices/shouldShakeSlice";
+import { setIsShakeDone, setShouldShake } from "../../redux/slices/shakeSlice";
+
 import { Apple } from "../Apple/Apple";
 
 export const AppleTree = () => {
     const shouldShake = useSelector(
         (state: { shouldShake: boolean }) => state.shouldShake
     );
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         const timer = setTimeout(() => {
             dispatch(setShouldShake(false));
+            dispatch(setIsShakeDone(true));
         }, 3000);
 
         return () => {

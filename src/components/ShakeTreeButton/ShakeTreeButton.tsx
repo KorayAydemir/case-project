@@ -1,6 +1,6 @@
 import { Button } from "../Button/Button";
 import { useDispatch } from "react-redux";
-import { setShouldShake } from "../../redux/slices/shouldShakeSlice";
+import { setShouldShake } from "../../redux/slices/shakeSlice";
 export const ShakeTreeButton = () => {
     const dispatch = useDispatch();
 

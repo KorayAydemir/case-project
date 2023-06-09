@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { shouldShakeReducer } from "./slices/shouldShakeSlice";
+import { isShakeDoneReducer, shouldShakeReducer } from "./slices/shakeSlice";
 
 export const store = configureStore({
     reducer: {
         shouldShake: shouldShakeReducer,
+        isShakeDone: isShakeDoneReducer,
     },
 });

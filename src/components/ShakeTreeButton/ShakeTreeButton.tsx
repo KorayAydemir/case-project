@@ -5,14 +5,22 @@ export const ShakeTreeButton = () => {
     const dispatch = useDispatch();
 
     const clickHandler = () => {
+        dispatch(setIsShakeDone(false));
         dispatch(setShouldShake(true));
-        const timer = setTimeout(() => {
+
+        const shakeDuration = setTimeout(() => {
             dispatch(setShouldShake(false));
-            dispatch(setIsShakeDone(true));
         }, 3000);
 
+        const yo = setTimeout(() => {
+            // if it is set at the same time as shouldShake, it will not work
+            // to observe: put this dispatch inside shakeDuration
+            dispatch(setIsShakeDone(true));
+        }, 3200);
+
         return () => {
-            clearTimeout(timer);
+            clearTimeout(shakeDuration);
+            clearTimeout(yo);
         };
     };
     return (

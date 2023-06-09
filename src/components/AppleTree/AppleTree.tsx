@@ -42,8 +42,8 @@ export const AppleTree = () => {
                 className={`${shouldShake ? "tree-shake-anim" : ""}`}
                 style={treeStyle}
             />
-            {applesCoords.map((coords) => (
-                <Apple coords={coords} />
+            {applesCoords.map((coords, i) => (
+                <Apple coords={coords} key={i} />
             ))}
         </div>
     );

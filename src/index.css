@@ -2,21 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-svg:hover #g3287 > *:not(:nth-child(36)):not(:nth-child(37)) {
-    animation: shake 0.5s;
-
-    animation-iteration-count: infinite;
-}*/
-
 .tree-shake-anim {
-    animation: shaker 1.8s;
+    animation: thugShaker 1.8s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
 
 .apple-shake-anim {
-    animation: shaker 1.8s;
+    animation: thugShaker 1.8s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
     animation-delay: 0.05s;
@@ -27,27 +20,7 @@ svg:hover #g3287 > *:not(:nth-child(36)):not(:nth-child(37)) {
     backface-visibility: hidden;
 }
 
-.apple-fall-anim {
-    animation: apple-fall 1s forwards;
-}
-
-@keyframes apple-fall {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(500px);
-    }
-}
-
-/*.shake-animation ~ #svg5 {
-    animation: shaker 1.8s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-delay: 0.1s;
-}*/
-
-@keyframes shaker {
+@keyframes thugShaker {
     0% {
         transform: translateX(0);
     }

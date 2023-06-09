@@ -16,7 +16,7 @@ export const ShakeTreeButton = () => {
             // if it is set at the same time as shouldShake, it will not work
             // to observe: put this dispatch inside shakeDuration
             dispatch(setIsShakeDone(true));
-        }, 3200);
+        }, 3110);
 
         return () => {
             clearTimeout(shakeDuration);

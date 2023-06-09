@@ -32,11 +32,16 @@ export const Apple = ({ coords }: { coords: TCoordinates }) => {
         if (isShakeDone) {
             const heightFromTop = parseInt(coords.top);
             const fallHeight = 690 - heightFromTop;
-            const fallDuration = (fallHeight * 0.01).toFixed(2);
+            const fallDuration = 3;
+            const delay = (
+                (parseInt(coords.top) + parseInt(coords.left)) *
+                0.01
+            ).toFixed(2);
 
             return {
-                transition: `transform ${fallDuration}s ease-in-out`,
+                transition: `transform ${fallDuration}s`,
                 transform: `translateY(${fallHeight}px)`,
+                transitionDelay: `${delay}s`,
             };
         } else {
             return null;

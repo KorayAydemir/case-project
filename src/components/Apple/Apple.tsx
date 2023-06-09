@@ -34,9 +34,15 @@ export const Apple = ({ coords }: { coords: TCoordinates }) => {
 
     const fallClassName = useMemo(() => {
         if (isShakeDone) {
+            console.log("done");
             const heightFromTop = parseInt(coords.top);
             const fallHeight = 690 - heightFromTop;
+            const fallDuration = (fallHeight * 0.01).toFixed(2);
+            console.log(
+                `fallheight: ${fallHeight} fallDuration: ${fallDuration}}`
+            );
             return {
+                transition: `transform ${fallDuration}s ease-in-out`,
                 transform: `translateY(${fallHeight}px)`,
             };
         }

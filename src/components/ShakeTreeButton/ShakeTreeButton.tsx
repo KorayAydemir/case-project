@@ -1,11 +1,19 @@
 import { Button } from "../Button/Button";
 import { useDispatch } from "react-redux";
-import { setShouldShake } from "../../redux/slices/shakeSlice";
+import { setShouldShake, setIsShakeDone } from "../../redux/slices/shakeSlice";
 export const ShakeTreeButton = () => {
     const dispatch = useDispatch();
 
     const clickHandler = () => {
         dispatch(setShouldShake(true));
+        const timer = setTimeout(() => {
+            dispatch(setShouldShake(false));
+            dispatch(setIsShakeDone(true));
+        }, 3000);
+
+        return () => {
+            clearTimeout(timer);
+        };
     };
     return (
         <div className="mt-10">

@@ -86,7 +86,6 @@ export const Apple = ({
         };
 
         animationFrameId = requestAnimationFrame(animate);
-        console.log(hasCollided);
 
         return () => {
             cancelAnimationFrame(animationFrameId);

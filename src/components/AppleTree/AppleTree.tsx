@@ -1,30 +1,15 @@
 import { useSelector } from "react-redux";
 import { Tree } from "../Tree/Tree";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { Apple } from "../Apple/Apple";
 
 export const AppleTree = () => {
-    const [isMobile, setIsMobile] = useState(true);
-
     const shouldShake = useSelector(
         (state: { shouldShake: boolean }) => state.shouldShake
     );
-
-    const handleResize = () => {
-        if (window.innerWidth < 768) {
-            setIsMobile(true);
-        } else {
-            setIsMobile(false);
-        }
-    };
-
-    useEffect(() => {
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+    const isMobile = useSelector(
+        (state: { setIsMobile: boolean }) => state.setIsMobile
+    );
 
     const treeWidth = isMobile ? 350 : 550;
     const treeHeight = isMobile ? 600 : 900;

@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { ReactComponent as AppleSvg } from "../../assets/apple.svg";
 
@@ -6,7 +6,13 @@ type TCoordinates = {
     left: string;
     top: string;
 };
-export const Apple = ({ coords }: { coords: TCoordinates }) => {
+export const Apple = ({
+    coords,
+    idx,
+}: {
+    coords: TCoordinates;
+    idx: number;
+}) => {
     const shouldShake = useSelector(
         (state: { shouldShake: boolean }) => state.shouldShake
     );
@@ -16,6 +22,8 @@ export const Apple = ({ coords }: { coords: TCoordinates }) => {
     );
 
     const firstRender = useRef(true);
+
+    const [hasCollided, setHasCollided] = useState(false);
 
     const extraClassName = useMemo(() => {
         if (shouldShake) {
@@ -32,29 +40,58 @@ export const Apple = ({ coords }: { coords: TCoordinates }) => {
         if (isShakeDone) {
             const heightFromTop = parseInt(coords.top);
             const fallHeight = 690 - heightFromTop;
-            const fallDuration = 3;
-            const delay = (
-                (parseInt(coords.top) + parseInt(coords.left)) *
-                0.01
-            ).toFixed(2);
+            const fallDuration = 1;
+            let delay = "1";
+            if (idx !== 0) {
+                delay = (
+                    (parseInt(coords.top) + parseInt(coords.left)) *
+                    0.01
+                ).toFixed(2);
+            }
 
             return {
-                transition: `transform ${fallDuration}s`,
+                transition: `transform ${fallDuration}s linear ${delay}s`,
                 transform: `translateY(${fallHeight}px)`,
-                transitionDelay: `${delay}s`,
             };
         } else {
             return null;
         }
-    }, [isShakeDone, coords]);
+    }, [isShakeDone, coords, idx]);
+
+    useEffect(() => {
+        const checkCollision = () => {
+            const appleRect = document
+                .getElementById(`apple-${idx}`)
+                ?.getBoundingClientRect();
+            const basketRect = document
+                .getElementById("basket")
+                ?.getBoundingClientRect();
+
+            if (appleRect && basketRect) {
+                const collision = !(
+                    appleRect.right < basketRect.left ||
+                    appleRect.left > basketRect.right ||
+                    appleRect.bottom < basketRect.top ||
+                    appleRect.top > basketRect.bottom
+                );
+
+                setHasCollided(collision);
+            }
+        };
+        checkCollision();
+        console.log(hasCollided);
+    }, [idx, hasCollided]);
 
     return (
-        <AppleSvg
+        <div
+            id={`apple-${idx}`}
             className={`w-[70px] h-[70px] absolute ${extraClassName}`}
             style={{
                 ...fallClassName,
                 ...coords,
             }}
-        />
+        >
+            <AppleSvg />
+        </div>
     );
 };

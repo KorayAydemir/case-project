@@ -14,28 +14,19 @@ export const Basket = () => {
                 const appleRect = apple.getBoundingClientRect();
 
                 if (appleRect && basketRect) {
-                    const collision = !(
-                        appleRect.right < basketRect.left ||
-                        appleRect.left > basketRect.right ||
-                        appleRect.bottom < basketRect.top ||
-                        appleRect.top > basketRect.bottom
-                    );
-
-                    if (collision) {
+                    if (isColliding(appleRect, basketRect)) {
                         apple.classList.add("hidden");
                     }
                 }
             });
         };
 
-        let animationFrameId: number;
-
         const animate = () => {
             checkCollision();
-            animationFrameId = requestAnimationFrame(animate);
+            requestAnimationFrame(animate);
         };
 
-        animationFrameId = requestAnimationFrame(animate);
+        const animationFrameId = requestAnimationFrame(animate);
 
         return () => {
             cancelAnimationFrame(animationFrameId);
@@ -47,6 +38,15 @@ export const Basket = () => {
             document.getElementsByClassName("apple")
         );
     }, []);
+
+    const isColliding = (appleRect: DOMRect, basketRect: DOMRect): boolean => {
+        return !(
+            appleRect.right < basketRect.left ||
+            appleRect.left > basketRect.right ||
+            appleRect.bottom < basketRect.top ||
+            appleRect.top > basketRect.bottom
+        );
+    };
 
     return (
         <div

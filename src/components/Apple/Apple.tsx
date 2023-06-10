@@ -51,7 +51,7 @@ export const Apple = ({
             }
 
             return {
-                transition: `transform ${fallDuration}s linear ${delay}s`,
+                transition: `transform ${fallDuration}s steps(35, end) ${delay}s`,
                 transform: `translateY(${fallHeight}px)`,
             };
         } else {

@@ -14,6 +14,7 @@ function App() {
 
     return (
         <div className="flex flex-row p-2  justify-between">
+            1.0
             <div className="relative">
                 <div className="flex">
                     <AppleTree />

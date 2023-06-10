@@ -32,7 +32,7 @@ export const Basket = () => {
     return (
         <div
             id="basket"
-            className="absolute w-[160px] bottom-[100px]"
+            className="absolute w-[150px] bottom-[100px] md:w-[90px]"
             style={{ transform: `translateX(-50%)`, left: pos.x }}
             onMouseMove={
                 handleMouseMove as unknown as React.MouseEventHandler<HTMLDivElement>

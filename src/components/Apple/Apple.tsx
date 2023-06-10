@@ -97,7 +97,7 @@ export const Apple = ({
         !hasCollided && (
             <div
                 id={`apple-${idx}`}
-                className={`w-[70px] h-[70px] absolute ${extraClassName}`}
+                className={`w-[60px] h-[60px] md:w-[40px] md:h-[40px] absolute ${extraClassName}`}
                 style={{
                     ...fallClassName,
                     ...coords,

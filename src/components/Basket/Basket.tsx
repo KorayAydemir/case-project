@@ -1,16 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { ReactComponent as BasketSvg } from "../../assets/apple_basket-cropped.svg";
 export const Basket = () => {
-    const [pos, setPos] = useState({ x: 0, y: 0 });
+    const [pos, setPos] = useState({ x: 0 });
 
-    const handleMouseMove = useCallback(
-        (e: Event) => {
-            const { clientX } = e as MouseEvent;
-
-            setPos({ x: clientX, y: pos.y });
-        },
-        [pos.y]
-    );
+    const handleMouseMove = useCallback((e: Event) => {
+        const { clientX } = e as MouseEvent;
+        setPos({ x: clientX });
+    }, []);
 
     useEffect(() => {
         document.addEventListener("mousemove", handleMouseMove);

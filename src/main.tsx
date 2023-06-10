@@ -8,7 +8,9 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <div className="overflow-hidden">
+                <App />
+            </div>
         </Provider>
     </React.StrictMode>
 );

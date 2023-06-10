@@ -37,7 +37,7 @@ export const AppleTree = () => {
     }, [getAppleCoordinates]);
 
     return (
-        <div className="relative max-w-screen-xl">
+        <div className="relative mx-auto max-w-screen-md">
             <Tree
                 className={`${shouldShake ? "tree-shake-anim" : ""}`}
                 style={treeStyle}

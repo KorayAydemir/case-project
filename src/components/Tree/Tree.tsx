@@ -7,5 +7,5 @@ export const Tree = ({
     className: string;
     style: React.CSSProperties;
 }) => {
-    return <TreeSvg className={className} style={style} />;
+    return <TreeSvg className={`${className}`} style={style} />;
 };

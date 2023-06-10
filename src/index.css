@@ -5,7 +5,7 @@
 .tree-shake-anim {
     animation: treeShaker 1.8s;
     animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: steps(6, end);
 }
 
 .apple-shake-anim {
@@ -15,9 +15,12 @@
     animation-delay: 0.05s;
 }
 
+.apple {
+    will-change: transform, scale;
+}
+
 .apple-start-anim {
-    animation: scaleUp 0.8s forwards;
-    animation-timing-function: steps(40, end);
+    animation: scaleUp 0.8s steps(21, end);
     backface-visibility: hidden;
 }
 

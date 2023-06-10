@@ -13,16 +13,18 @@ function App() {
     if (isMobile === null) return null;
 
     return (
-        <div className="flex flex-row p-2  justify-between">
-            1.0
-            <div className="relative">
-                <div className="flex">
-                    <AppleTree />
-                    <ShakeTreeButton />
+        <>
+            <span>1.2</span>
+            <div className="flex flex-row p-2  justify-between">
+                <div className="relative">
+                    <div className="flex">
+                        <AppleTree />
+                        <ShakeTreeButton />
+                    </div>
+                    <Basket />
                 </div>
-                <Basket />
             </div>
-        </div>
+        </>
     );
 }
 

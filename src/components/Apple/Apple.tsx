@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
 import { ReactComponent as AppleSvg } from "../../assets/apple.svg";
 
@@ -24,8 +24,6 @@ export const Apple = ({
     );
 
     const firstRender = useRef(true);
-
-    const [hasCollided, setHasCollided] = useState(false);
 
     const extraClassName = useMemo(() => {
         if (shouldShake) {
@@ -61,52 +59,16 @@ export const Apple = ({
         }
     }, [isShakeDone, coords, idx, isMobile]);
 
-    useEffect(() => {
-        const checkCollision = () => {
-            const appleRect = document
-                .getElementById(`apple-${idx}`)
-                ?.getBoundingClientRect();
-            const basketRect = document
-                .getElementById("basket")
-                ?.getBoundingClientRect();
-
-            if (appleRect && basketRect) {
-                const collision = !(
-                    appleRect.right < basketRect.left ||
-                    appleRect.left > basketRect.right ||
-                    appleRect.bottom < basketRect.top ||
-                    appleRect.top > basketRect.bottom
-                );
-
-                setHasCollided(collision);
-            }
-        };
-        let animationFrameId: number;
-
-        const animate = () => {
-            checkCollision();
-            animationFrameId = requestAnimationFrame(animate);
-        };
-
-        animationFrameId = requestAnimationFrame(animate);
-
-        return () => {
-            cancelAnimationFrame(animationFrameId);
-        };
-    }, [idx, hasCollided]);
-
     return (
-        !hasCollided && (
-            <div
-                id={`apple-${idx}`}
-                className={`w-[60px] h-[60px] md:w-[40px] md:h-[40px] absolute ${extraClassName} z-10`}
-                style={{
-                    ...fallClassName,
-                    ...coords,
-                }}
-            >
-                <AppleSvg />
-            </div>
-        )
+        <div
+            id={`apple-${idx}`}
+            className={`apple w-[60px] h-[60px] md:w-[40px] md:h-[40px] absolute ${extraClassName} z-10`}
+            style={{
+                ...fallClassName,
+                ...coords,
+            }}
+        >
+            <AppleSvg />
+        </div>
     );
 };

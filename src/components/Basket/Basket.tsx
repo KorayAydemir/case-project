@@ -1,19 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ReactComponent as BasketSvg } from "../../assets/apple_basket-cropped.svg";
 import { useCursorTracker } from "../../hooks/useCursorTracker";
 export const Basket = () => {
     const { pos, handleMouseMove } = useCursorTracker();
+    const basketRef = useRef<HTMLDivElement>(null);
+    const applesRef = useRef<Element[] | null>(null);
 
     useEffect(() => {
         const checkCollision = () => {
-            const apples = document.getElementsByClassName("apple");
-            const applesArray = Array.from(apples);
+            const basketRect = basketRef.current?.getBoundingClientRect();
 
-            const basketRect = document
-                .getElementById("basket")
-                ?.getBoundingClientRect();
-
-            applesArray.forEach((apple) => {
+            applesRef?.current?.forEach((apple) => {
                 const appleRect = apple.getBoundingClientRect();
 
                 if (appleRect && basketRect) {
@@ -45,9 +42,16 @@ export const Basket = () => {
         };
     }, []);
 
+    useEffect(() => {
+        applesRef.current = Array.from(
+            document.getElementsByClassName("apple")
+        );
+    }, []);
+
     return (
         <div
             id="basket"
+            ref={basketRef}
             className="absolute w-[135px] bottom-[110px] md:w-[90px]"
             style={{ transform: `translateX(-50%)`, left: pos.x }}
             onMouseMove={

@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 export const useCollisionDetector = (
     basketRef: React.RefObject<HTMLDivElement>
 ) => {
-    const applesRef = useRef<Element[] | null>(null);
+    const applesRef = useRef<HTMLElement[] | null>(null);
 
     useEffect(() => {
         const checkCollision = () => {
@@ -13,7 +13,16 @@ export const useCollisionDetector = (
 
                 if (appleRect && basketRect) {
                     if (isColliding(appleRect, basketRect)) {
-                        apple.classList.add("hidden");
+                        apple.getAnimations().forEach((anim) => anim.finish());
+
+                        apple.style.transform = "translate(0,0)";
+                        apple.style.position = "unset";
+                        const insideBasket =
+                            document.getElementById("inside_basket");
+
+                        if (insideBasket) {
+                            insideBasket.appendChild(apple);
+                        }
                     }
                 }
             });
@@ -33,7 +42,9 @@ export const useCollisionDetector = (
 
     useEffect(() => {
         applesRef.current = Array.from(
-            document.getElementsByClassName("apple")
+            document.getElementsByClassName(
+                "apple"
+            ) as HTMLCollectionOf<HTMLElement>
         );
     }, []);
 

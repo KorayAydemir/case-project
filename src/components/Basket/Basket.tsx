@@ -17,6 +17,7 @@ export const Basket = () => {
                 handleMouseMove as unknown as React.MouseEventHandler<HTMLDivElement>
             }
         >
+            <div className="flex" id="inside_basket"></div>
             <BasketSvg />
         </div>
     );

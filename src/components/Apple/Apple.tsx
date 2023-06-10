@@ -78,20 +78,33 @@ export const Apple = ({
                 setHasCollided(collision);
             }
         };
-        checkCollision();
+        let animationFrameId: number;
+
+        const animate = () => {
+            checkCollision();
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        animationFrameId = requestAnimationFrame(animate);
         console.log(hasCollided);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+        };
     }, [idx, hasCollided]);
 
     return (
-        <div
-            id={`apple-${idx}`}
-            className={`w-[70px] h-[70px] absolute ${extraClassName}`}
-            style={{
-                ...fallClassName,
-                ...coords,
-            }}
-        >
-            <AppleSvg />
-        </div>
+        !hasCollided && (
+            <div
+                id={`apple-${idx}`}
+                className={`w-[70px] h-[70px] absolute ${extraClassName}`}
+                style={{
+                    ...fallClassName,
+                    ...coords,
+                }}
+            >
+                <AppleSvg />
+            </div>
+        )
     );
 };

@@ -20,6 +20,10 @@
     backface-visibility: hidden;
 }
 
+.collided {
+    display: none;
+}
+
 @keyframes thugShaker {
     0% {
         transform: translateX(0);

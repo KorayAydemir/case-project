@@ -3,7 +3,7 @@ export const Basket = () => {
     return (
         <div
             id="basket"
-            className="absolute w-[200px] top-[150px] right-[50px]"
+            className="absolute w-[200px] bottom-[150px] right-[50px]"
         >
             <BasketSvg />
         </div>

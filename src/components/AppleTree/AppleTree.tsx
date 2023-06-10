@@ -20,7 +20,7 @@ export const AppleTree = () => {
     };
 
     const getAppleCoordinates = useCallback(() => {
-        const numApples = 20;
+        const numApples = 12;
         const treeRadius = treeHeight / 2 / 2;
         return Array.from({ length: numApples }).map(() => {
             const angle = Math.random() * 360 * (Math.PI / 180);

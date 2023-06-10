@@ -9,9 +9,11 @@ type TCoordinates = {
 export const Apple = ({
     coords,
     idx,
+    isMobile,
 }: {
     coords: TCoordinates;
     idx: number;
+    isMobile: boolean;
 }) => {
     const shouldShake = useSelector(
         (state: { shouldShake: boolean }) => state.shouldShake
@@ -39,7 +41,8 @@ export const Apple = ({
     const fallClassName = useMemo(() => {
         if (isShakeDone) {
             const heightFromTop = parseInt(coords.top);
-            const fallHeight = 690 - heightFromTop;
+            const fallHeightModifier = isMobile ? 500 : 790;
+            const fallHeight = fallHeightModifier - heightFromTop;
             const fallDuration = 1;
             let delay = "1";
             if (idx !== 0) {
@@ -56,7 +59,7 @@ export const Apple = ({
         } else {
             return null;
         }
-    }, [isShakeDone, coords, idx]);
+    }, [isShakeDone, coords, idx, isMobile]);
 
     useEffect(() => {
         const checkCollision = () => {

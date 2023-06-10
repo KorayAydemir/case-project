@@ -47,7 +47,7 @@ export const AppleTree = () => {
                 style={treeStyle}
             />
             {applesCoords.map((coords, i) => (
-                <Apple coords={coords} key={i} idx={i} />
+                <Apple coords={coords} key={i} idx={i} isMobile={isMobile} />
             ))}
         </div>
     );

@@ -24,7 +24,7 @@ export const ShakeTreeButton = () => {
         };
     };
     return (
-        <div className="mt-10">
+        <div className="mt-10 md:absolute md:bottom-[200px]">
             <Button onClick={clickHandler}>
                 <span className="text-2xl">Shake it! </span>
             </Button>

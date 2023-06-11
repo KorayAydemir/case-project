@@ -10,8 +10,8 @@ export const AppleTree = () => {
     );
     const isMobile = useSelector((state: RootState) => state.setIsMobile);
 
-    const treeWidth = isMobile ? 350 : 550;
-    const treeHeight = isMobile ? 600 : 900;
+    const treeWidth = isMobile ? 300 : 550;
+    const treeHeight = isMobile ? 550 : 900;
 
     const treeStyle = {
         width: `${treeWidth}px`,

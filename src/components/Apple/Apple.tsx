@@ -62,7 +62,7 @@ export const Apple = ({
     return (
         <div
             id={`apple-${idx}`}
-            className={`apple w-[60px] h-[40px] md:w-[40px] md:h-[23px] absolute ${extraClassName} z-10`}
+            className={`apple w-[60px] h-[40px] md:w-[36px] md:h-[22px] absolute ${extraClassName} z-10`}
             style={{
                 ...fallClassName,
                 ...coords,

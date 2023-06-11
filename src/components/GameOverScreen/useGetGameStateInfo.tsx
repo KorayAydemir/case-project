@@ -18,7 +18,7 @@ export function useGetGameStateInfo() {
                 return {
                     state: gameState.now,
                     message: "You Lost!",
-                    subMessage: "Fool.",
+                    subMessage: "Git Gud!",
                     score: gameState.score,
                 };
             default:

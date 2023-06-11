@@ -22,6 +22,7 @@
 
 .apple {
     will-change: transform, scale;
+    flex-basis: 33%;
 }
 
 .apple-start-anim {

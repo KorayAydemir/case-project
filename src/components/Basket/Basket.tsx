@@ -11,13 +11,17 @@ export const Basket = () => {
         <div
             id="basket"
             ref={basketRef}
-            className="absolute w-[135px] bottom-[110px] md:w-[90px]"
+            className="absolute w-[135px] bottom-[110px] md:w-[90px] "
             style={{ transform: `translateX(-50%)`, left: pos.x }}
             onMouseMove={
                 handleMouseMove as unknown as React.MouseEventHandler<HTMLDivElement>
             }
         >
-            <div className="flex" id="inside_basket"></div>
+            <div
+                className="flex flex-wrap flex-row items-end
+                 h-min absolute w-[140px] bottom-[0px]"
+                id="inside_basket"
+            ></div>
             <BasketSvg />
         </div>
     );

@@ -14,19 +14,18 @@ export const ShakeTreeButton = () => {
         dispatch(setShouldShake(true));
         setIsButtonDisabled(true);
 
-        const shakeDuration = setTimeout(() => {
+        const endTreeShakeTimer = setTimeout(() => {
             dispatch(setShouldShake(false));
         }, 3000);
 
-        const yo = setTimeout(() => {
+        const shakeIsDoneTimer = setTimeout(() => {
             // If it is set at the same time as shouldShake, animation
             // will not work as expected, must be a css thing.
             // To observe: put this dispatch inside shakeDuration
             dispatch(setIsShakeDone(true));
         }, 3110);
 
-        const enableButton = setTimeout(() => {
-            setIsButtonDisabled(false);
+        const gameOverTimer = setTimeout(() => {
             const amountOfApplesInsideBasket =
                 document.getElementById("inside_basket")?.childElementCount;
 
@@ -43,9 +42,9 @@ export const ShakeTreeButton = () => {
         }, 12000);
 
         return () => {
-            clearTimeout(shakeDuration);
-            clearTimeout(yo);
-            clearTimeout(enableButton);
+            clearTimeout(endTreeShakeTimer);
+            clearTimeout(shakeIsDoneTimer);
+            clearTimeout(gameOverTimer);
         };
     };
     return (

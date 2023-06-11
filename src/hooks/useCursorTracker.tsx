@@ -26,6 +26,7 @@ export const useCursorTracker = () => {
     const throttledhandleMouseMove = throttleFunc(handleMouseMove, 20);
 
     useEffect(() => {
+        console.log("a:w");
         document.addEventListener("mousemove", throttledhandleMouseMove);
         document.addEventListener("touchmove", throttledhandleMouseMove, {
             passive: false,

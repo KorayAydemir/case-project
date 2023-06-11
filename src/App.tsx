@@ -15,7 +15,7 @@ function App() {
 
     return (
         <>
-            <span className="text-white opacity-80">v5</span>
+            <span className="text-white opacity-80">v6</span>
             <div className="flex flex-row p-2  justify-between">
                 <div className="relative">
                     <div className="flex">

@@ -2,6 +2,8 @@ import { Button } from "../Button/Button";
 import { useDispatch } from "react-redux";
 import { setShouldShake, setIsShakeDone } from "../../redux/slices/shakeSlice";
 import { useState } from "react";
+import { setGameState } from "../../redux/slices/gameStateSlice";
+import { GameState } from "../../redux/slices/gameStateSlice";
 export const ShakeTreeButton = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -25,14 +27,18 @@ export const ShakeTreeButton = () => {
 
         const enableButton = setTimeout(() => {
             setIsButtonDisabled(false);
+            const amountOfApplesInsideBasket =
+                document.getElementById("inside_basket")?.childElementCount;
 
-            // if there are 12 apple in inside_basket div, then
-            // the game is over
-            if (
-                document.getElementById("inside_basket")?.childElementCount ===
-                12
-            ) {
-                console.log("you won");
+            if (amountOfApplesInsideBasket === 12) {
+                dispatch(setGameState({ now: GameState.WON, score: 12 }));
+            } else {
+                dispatch(
+                    setGameState({
+                        now: GameState.LOST,
+                        score: amountOfApplesInsideBasket,
+                    })
+                );
             }
         }, 9500);
 

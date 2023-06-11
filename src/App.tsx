@@ -3,14 +3,17 @@ import { ShakeTreeButton } from "./components/ShakeTreeButton/ShakeTreeButton";
 import { Basket } from "./components/Basket/Basket";
 import { useHandleResize } from "./hooks/useHandleResize";
 import { useSelector } from "react-redux";
+import { RootState } from "./redux/store";
+import { GameState } from "./redux/slices/gameStateSlice";
+import { GameOverScreen } from "./components/GameOverScreens/GameOverScreen";
 
 function App() {
+    const gameState = useSelector((state: RootState) => state.gameState);
     useHandleResize();
-    const isMobile = useSelector(
-        (state: { setIsMobile: boolean }) => state.setIsMobile
-    );
-
+    const isMobile = useSelector((state: RootState) => state.setIsMobile);
     if (isMobile === null) return null;
+
+    console.log(gameState);
 
     return (
         <>
@@ -23,6 +26,7 @@ function App() {
                     </div>
                     <Basket />
                 </div>
+                {gameState.now !== GameState.PLAYING && <GameOverScreen />}
             </div>
         </>
     );

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+    background-color: #161718;
+    height: 100vh;
+}
+
 .tree-shake-anim {
     animation: treeShaker 1.8s;
     animation-iteration-count: infinite;

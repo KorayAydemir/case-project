@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ReactComponent as BasketSvg } from "../../assets/apple_basket-cropped.svg";
+import { ReactComponent as BasketSvg } from "../../assets/apple_basket-optimized.svg";
 import { useCursorTracker } from "../../hooks/useCursorTracker";
 import { useCollisionDetector } from "../../hooks/useCollisionDetector";
 export const Basket = () => {

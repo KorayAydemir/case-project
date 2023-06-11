@@ -5,7 +5,7 @@ import { useHandleResize } from "./hooks/useHandleResize";
 import { useSelector } from "react-redux";
 import { RootState } from "./redux/store";
 import { GameState } from "./redux/slices/gameStateSlice";
-import { GameOverScreen } from "./components/GameOverScreens/GameOverScreen";
+import { GameOverScreen } from "./components/GameOverScreen/GameOverScreen";
 
 function App() {
     const gameState = useSelector((state: RootState) => state.gameState);

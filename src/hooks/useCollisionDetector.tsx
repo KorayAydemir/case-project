@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { throttleFunc } from "../utils/throttleFunction";
 
 export const useCollisionDetector = (
     basketRef: React.RefObject<HTMLDivElement>
@@ -29,7 +30,7 @@ export const useCollisionDetector = (
             });
         };
 
-        const throttledCheckCollision = throttle(checkCollision, 140);
+        const throttledCheckCollision = throttleFunc(checkCollision, 140);
 
         const animate = () => {
             throttledCheckCollision();
@@ -60,24 +61,3 @@ export const useCollisionDetector = (
         );
     };
 };
-
-function throttle(callback: () => void, delay: number) {
-    let timeoutId: NodeJS.Timeout | null;
-    let lastExecutionTime = 0;
-
-    return function throttledFunction() {
-        const currentTime = Date.now();
-        const elapsedTime = currentTime - lastExecutionTime;
-
-        if (!lastExecutionTime || elapsedTime >= delay) {
-            callback();
-            lastExecutionTime = currentTime;
-        } else {
-            timeoutId && clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                callback();
-                lastExecutionTime = Date.now();
-            }, delay - elapsedTime);
-        }
-    };
-}

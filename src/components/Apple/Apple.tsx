@@ -13,7 +13,7 @@ export const Apple = ({
 }: {
     coords: TCoordinates;
     idx: number;
-    isMobile: boolean;
+    isMobile: boolean | null;
 }) => {
     const shouldShake = useSelector(
         (state: { shouldShake: boolean }) => state.shouldShake

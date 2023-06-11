@@ -2,14 +2,13 @@ import { useSelector } from "react-redux";
 import { Tree } from "../Tree/Tree";
 import { useCallback, useMemo } from "react";
 import { Apple } from "../Apple/Apple";
+import { RootState } from "@components/redux/store";
 
 export const AppleTree = () => {
     const shouldShake = useSelector(
         (state: { shouldShake: boolean }) => state.shouldShake
     );
-    const isMobile = useSelector(
-        (state: { setIsMobile: boolean }) => state.setIsMobile
-    );
+    const isMobile = useSelector((state: RootState) => state.setIsMobile);
 
     const treeWidth = isMobile ? 350 : 550;
     const treeHeight = isMobile ? 600 : 900;

@@ -40,7 +40,7 @@ export const ShakeTreeButton = () => {
                     })
                 );
             }
-        }, 9500);
+        }, 11000);
 
         return () => {
             clearTimeout(shakeDuration);

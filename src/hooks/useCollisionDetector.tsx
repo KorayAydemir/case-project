@@ -29,8 +29,10 @@ export const useCollisionDetector = (
             });
         };
 
+        const throttledCheckCollision = throttle(checkCollision, 200);
+
         const animate = () => {
-            checkCollision();
+            throttledCheckCollision();
             requestAnimationFrame(animate);
         };
 
@@ -58,3 +60,24 @@ export const useCollisionDetector = (
         );
     };
 };
+
+function throttle(callback: () => void, delay: number) {
+    let timeoutId: NodeJS.Timeout | null;
+    let lastExecutionTime = 0;
+
+    return function throttledFunction() {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - lastExecutionTime;
+
+        if (!lastExecutionTime || elapsedTime >= delay) {
+            callback();
+            lastExecutionTime = currentTime;
+        } else {
+            timeoutId && clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                callback();
+                lastExecutionTime = Date.now();
+            }, delay - elapsedTime);
+        }
+    };
+}

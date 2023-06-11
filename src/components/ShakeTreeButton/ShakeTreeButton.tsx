@@ -25,7 +25,16 @@ export const ShakeTreeButton = () => {
 
         const enableButton = setTimeout(() => {
             setIsButtonDisabled(false);
-        }, 9000);
+
+            // if there are 12 apple in inside_basket div, then
+            // the game is over
+            if (
+                document.getElementById("inside_basket")?.childElementCount ===
+                12
+            ) {
+                console.log("you won");
+            }
+        }, 9500);
 
         return () => {
             clearTimeout(shakeDuration);

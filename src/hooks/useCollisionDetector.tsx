@@ -9,12 +9,12 @@ export const useCollisionDetector = (
         const checkCollision = () => {
             const basketRect = basketRef.current?.getBoundingClientRect();
             applesRef?.current?.forEach((apple) => {
+                if (apple.classList.contains("in_basket")) return;
                 const appleRect = apple.getBoundingClientRect();
 
                 if (appleRect && basketRect) {
                     if (isColliding(appleRect, basketRect)) {
                         apple.getAnimations().forEach((anim) => anim.finish());
-
                         apple.style.transform = "translate(0,0)";
                         apple.style.position = "unset";
                         const insideBasket =
@@ -23,6 +23,7 @@ export const useCollisionDetector = (
                         if (insideBasket) {
                             insideBasket.appendChild(apple);
                         }
+                        apple.classList.add("in_basket");
                     }
                 }
             });

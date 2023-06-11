@@ -29,7 +29,7 @@ export const useCollisionDetector = (
             });
         };
 
-        const throttledCheckCollision = throttle(checkCollision, 200);
+        const throttledCheckCollision = throttle(checkCollision, 140);
 
         const animate = () => {
             throttledCheckCollision();

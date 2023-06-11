@@ -13,11 +13,9 @@ function App() {
     const isMobile = useSelector((state: RootState) => state.setIsMobile);
     if (isMobile === null) return null;
 
-    console.log(gameState);
-
     return (
         <>
-            <span className="text-white opacity-80">v3</span>
+            <span className="text-white opacity-80">v4</span>
             <div className="flex flex-row p-2  justify-between">
                 <div className="relative">
                     <div className="flex">
